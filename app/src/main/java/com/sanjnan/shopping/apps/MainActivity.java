@@ -76,6 +76,8 @@ public class MainActivity
         extends AbstractActivity
         implements LocationManager.Listener {
 
+    private String productId = null;
+    private float price = -0.0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,15 +117,21 @@ public class MainActivity
         }
         {
 
-            ImageButton imageButton = (ImageButton)(findViewById(R.id.next));
+            final ImageButton imageButton = (ImageButton)(findViewById(R.id.next));
             imageButton.setVisibility(View.VISIBLE);
             imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    Intent intent = new Intent(MainActivity.this, ProductActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString(Constants.PRODUCT_ID, productId);
+                    b.putFloat(Constants.PRICE, price);
+                    intent.putExtras(b);
+                    startActivity(intent);
                 }
             });
         }
+        // Database.INSTANCE.populateDummyData();
     }
 
     @Override
@@ -176,6 +184,7 @@ public class MainActivity
                 makeDetailsVisible();
                 TextView tv = findViewById(R.id.barcodeNumber);
                 tv.setText(result.getContents());
+                productId = tv.getText().toString();
             }
         }
         else if(requestCode == Constants.REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -300,6 +309,7 @@ public class MainActivity
                         if (barcodes.size() > 0) {
                             TextView tv = (TextView) (findViewById(R.id.barcodeNumber));
                             tv.setText(barcodes.get(0).getRawValue());
+                            productId = tv.getText().toString();
                             makeDetailsVisible();
                         }
                         else {
@@ -386,6 +396,13 @@ public class MainActivity
                                         if (numberPercentage(text) > .5) {
                                             TextView tv = (TextView) (findViewById(R.id.price));
                                             tv.setText(text);
+                                            try {
+
+                                                price = Float.parseFloat(tv.getText().toString());
+                                            }
+                                            catch(NumberFormatException ex) {
+                                                price = 0.0f;
+                                            }
                                         }
                                         else {
 

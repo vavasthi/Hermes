@@ -40,4 +40,9 @@ public class Constants {
     public static final String ORGANIZATION_ID = "ORGANIZATION_ID";
     public static final int ROUNDED_CORNER_RADIUS = 16;
 
+    public static final String VENDORS_KEY = "/vendors";
+    public static final String PRODUCTS_KEY = "/products";
+    public static final String VENDOR_FOR_PRODUCTS_KEY = "/vendor-for-products";
+    public static final String PRODUCT_ID = "PRODUCT_ID";
+    public static final String PRICE = "PRICE";
 }

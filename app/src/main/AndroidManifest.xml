@@ -16,7 +16,7 @@
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="barcode|ocr" />
-        <activity android:name=".BarcodeScanningActivity"/>
+        <activity android:name=".ProductActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
