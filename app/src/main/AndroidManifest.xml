@@ -16,7 +16,11 @@
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="barcode|ocr" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyB25yazOiMkeHXxgOHznJLopfCW9pmfPsQ" />
         <activity android:name=".ProductActivity"/>
+        <activity android:name=".ProductAvailabilityActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

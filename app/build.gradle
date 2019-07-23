@@ -51,6 +51,7 @@ dependencies {
     implementation "com.google.android.gms:play-services-auth:$playServicesVersion"
     implementation "com.google.android.gms:play-services-identity:$playServicesVersion"
     implementation "com.google.android.gms:play-services-location:$playServicesVersion"
+    implementation "com.google.android.gms:play-services-places:$playServicesVersion"
     implementation 'com.firebase:geofire-android:2.2.0'
     implementation 'com.google.zxing:zxing-parent:3.4.0'
 
