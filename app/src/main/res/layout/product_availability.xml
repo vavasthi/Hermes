@@ -52,7 +52,7 @@
             android:layout_gravity="right"
             android:text="Button" />
         <TextView
-            android:id="@+id/pricing"
+            android:id="@+id/price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".5"

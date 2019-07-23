@@ -21,7 +21,7 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.product_availability);
         Bundle bundle = getIntent().getExtras();
         final String productId = bundle.getString(Constants.PRODUCT_ID);
-        final float price = bundle.getFloat(Constants.PRICE);
+        final float price = bundle.getFloat(Constants.PRICE, 0.0f);
         Database
                 .INSTANCE
                 .getInstance()
