@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.ChildEventListener;
@@ -31,6 +33,13 @@ public class ProductAvailabilityActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         final String productId = bundle.getString(Constants.PRODUCT_ID);
         final float price = bundle.getFloat(Constants.PRICE, 0.0f);
+        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.product_vendor_availability_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(new ProductVendorAdapter(this, productId, price));
+        recyclerView.invalidate();
+
         Database
                 .INSTANCE
                 .getInstance()
