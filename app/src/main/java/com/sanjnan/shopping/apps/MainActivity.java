@@ -113,6 +113,17 @@ public class MainActivity
                 }
             });
         }
+        {
+
+            ImageButton imageButton = (ImageButton)(findViewById(R.id.next));
+            imageButton.setVisibility(View.VISIBLE);
+            imageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+        }
     }
 
     @Override
@@ -162,6 +173,9 @@ public class MainActivity
             IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
             if (result != null) {
                 // this.scannedValue.setText(result.getContents());
+                makeDetailsVisible();
+                TextView tv = findViewById(R.id.barcodeNumber);
+                tv.setText(result.getContents());
             }
         }
         else if(requestCode == Constants.REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -286,6 +300,7 @@ public class MainActivity
                         if (barcodes.size() > 0) {
                             TextView tv = (TextView) (findViewById(R.id.barcodeNumber));
                             tv.setText(barcodes.get(0).getRawValue());
+                            makeDetailsVisible();
                         }
                         else {
                             Toast.makeText(MainActivity.this, "No Barcode Found. Please Use Barcode Scanner Icon", Toast.LENGTH_LONG).show();
@@ -378,6 +393,7 @@ public class MainActivity
                                             tv.setText(text);
                                         }
                                     }
+                                    makeDetailsVisible();
                                 }
 /*                                for (FirebaseVisionText.TextBlock block : firebaseVisionText.getTextBlocks()) {
                                     Rect boundingBox = block.getBoundingBox();
@@ -581,5 +597,9 @@ public class MainActivity
             }
         }
         return ((float)digitCount)/((float)str.length());
+    }
+    private void makeDetailsVisible() {
+        View v = findViewById(R.id.product_details_layout);
+        v.setVisibility(View.VISIBLE);
     }
 }

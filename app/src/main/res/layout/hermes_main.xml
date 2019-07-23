@@ -45,6 +45,12 @@
             android:text="Button" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/product_details_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="horizontal">
 
     <EditText
         android:id="@+id/barcodeNumber"
@@ -68,5 +74,16 @@
         android:ems="10"
         android:hint="@string/price"
         android:inputType="textPersonName"/>
+
+    <ImageButton
+        android:id="@+id/next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".5"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_navigate_next_white_48dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Button" />
+    </LinearLayout>
 
 </LinearLayout>
