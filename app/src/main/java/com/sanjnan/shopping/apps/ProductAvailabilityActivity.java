@@ -57,15 +57,6 @@ public class ProductAvailabilityActivity extends AppCompatActivity {
 
                     }
                 });
-        {
-            ImageButton ib = findViewById(R.id.next);
-            ib.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
-        }
     }
     private void populateView(String productId, float price, Product p) {
         {
