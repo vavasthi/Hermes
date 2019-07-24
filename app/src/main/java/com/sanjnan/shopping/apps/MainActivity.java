@@ -339,7 +339,8 @@ public class MainActivity
                                     value += "BC : " + rawValue + " |";
                                     tv.setText(value);
                                 }
-                            });
+                            });            vendorsReference = databaseReference.child(Constants.VENDORS_KEY).push();
+
                             switch (valueType) {
                                 case FirebaseVisionBarcode.TYPE_WIFI:
                                     String ssid = barcode.getWifi().getSsid();

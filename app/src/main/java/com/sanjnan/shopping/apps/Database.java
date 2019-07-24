@@ -20,7 +20,7 @@ public class Database {
     public void populateDummyData() {
         Currency currency = Currency.getInstance(Locale.getDefault());
         String symbol = currency.getSymbol();
-        DatabaseReference vendorsReference = databaseReference.child(Constants.VENDORS_KEY).push();
+        DatabaseReference vendorsReference = databaseReference.child(Constants.VENDORS_KEY);
         DatabaseReference productsReference = databaseReference.child(Constants.PRODUCTS_KEY);
         DatabaseReference productVendorReference = databaseReference.child(Constants.VENDOR_FOR_PRODUCTS_KEY);
         Product p = new Product("4548736089815", "https://firebasestorage.googleapis.com/v0/b/road-buddy-3a3f4.appspot.com/o/logos%2F71JWip4ygQL._AC_UL436_SEARCH212385_.jpg?alt=media&token=242c1ea5-a1fb-4486-ac0b-b4b55443a0de", "Sony WH-XB700 Wireless Extra Bass Headphones (Blue)", "Headphones made for electronic dance music (EDM)\n" + "Wireless Extra Bass Headphones for deep and punchy bass\n" +
@@ -33,6 +33,7 @@ public class Database {
         productsReference.child(p.getId()).setValue(p);
         {
 
+            vendorsReference = databaseReference.child(Constants.VENDORS_KEY).push();
             Vendor v = new Vendor(vendorsReference.getKey(), "https://firebasestorage.googleapis.com/v0/b/road-buddy-3a3f4.appspot.com/o/logos%2Ficons8-diamond-100.png?alt=media&token=65814873-be5a-425f-9b13-75bc6f9f0796", "Cromz", 5.0f,  12.9431293,77.6956571);
             vendorsReference.setValue(v);
             VendorProduct vendorProduct = new VendorProduct(p.getId(), v.getId(), 5999.00f, 0);
@@ -40,6 +41,7 @@ public class Database {
         }
         {
 
+            vendorsReference = databaseReference.child(Constants.VENDORS_KEY).push();
             Vendor v = new Vendor(vendorsReference.getKey(), "https://firebasestorage.googleapis.com/v0/b/road-buddy-3a3f4.appspot.com/o/logos%2Ficons8-diamond-100.png?alt=media&token=65814873-be5a-425f-9b13-75bc6f9f0796", "MyKart", 4.5f,  12.9705219,77.6388624);
             vendorsReference.setValue(v);
             VendorProduct vendorProduct = new VendorProduct(p.getId(), v.getId(), 5699.00f, 0);
@@ -47,6 +49,7 @@ public class Database {
         }
         {
 
+            vendorsReference = databaseReference.child(Constants.VENDORS_KEY).push();
             Vendor v = new Vendor(vendorsReference.getKey(), "https://firebasestorage.googleapis.com/v0/b/road-buddy-3a3f4.appspot.com/o/logos%2Ficons8-diamond-100.png?alt=media&token=65814873-be5a-425f-9b13-75bc6f9f0796", "Reliant", 4.0f,  12.916597,77.5891083);
             vendorsReference.setValue(v);
             VendorProduct vendorProduct = new VendorProduct(p.getId(), v.getId(), 6299.00f, 0);
