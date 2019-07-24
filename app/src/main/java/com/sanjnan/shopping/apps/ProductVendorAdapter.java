@@ -1,16 +1,20 @@
 package com.sanjnan.shopping.apps;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -54,6 +58,7 @@ public class ProductVendorAdapter
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public View view;
+        public Vendor vendor;
 
         public ViewHolder(View v) {
             super(v);
@@ -131,38 +136,26 @@ public class ProductVendorAdapter
         // - replace the contents of the view with that element
         final VendorProduct vp = vendorProductList.get(position);
         final Vendor v = vendorMap.get(vp.getVendorId());
+        holder.vendor = v;
         Glide.with(context).load(v.getUrl())
                 .into((ImageView) holder.view.findViewById(R.id.vendor_logo));
         ((RatingBar) holder.view.findViewById(R.id.vendor_rating)).setRating(v.getRating());
         ((TextView) holder.view.findViewById(R.id.vendor_name)).setText(v.getName());
         ((TextView) holder.view.findViewById(R.id.price)).setText(String.format("%.2f", vp.getPrice()));
         ((TextView) holder.view.findViewById(R.id.availability)).setText(vp.getAvailability() == 0 ? "Available Now!" : String.format("in %d days!", vp.getAvailability()));
-        SupportMapFragment map = (SupportMapFragment) context.getSupportFragmentManager().findFragmentById(R.id.vendor_location);
-        map.getMapAsync(new OnMapReadyCallback() {
+        ((ImageButton)holder.view.findViewById(R.id.map_button)).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onMapReady(GoogleMap googleMap) {
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                        new LatLng(v.getLatitude(), v.getLongitude()), 16));
-                googleMap.addMarker(new MarkerOptions()
-                        .icon(BitmapDescriptorFactory.defaultMarker())
-                        .anchor(0.0f, 1.0f) // Anchors the marker on the bottom left
-                        .position(new LatLng(v.getLatitude(), v.getLongitude()))); //Iasi, Romania
-                if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                        && context.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    Activity#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for Activity#requestPermissions for more details.
-                    return;
-                }
-                googleMap.setMyLocationEnabled(true);
+            public void onClick(View view) {
+                Intent intent = new Intent(context, VendorLocationActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putDouble(Constants.LATITUDE, v.getLatitude());
+                bundle.putDouble(Constants.LONGITUDE, v.getLongitude());
+                bundle.putString(Constants.VENDOR_NAME, v.getName());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         });
     }
-
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {

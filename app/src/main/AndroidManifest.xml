@@ -21,6 +21,7 @@
             android:value="AIzaSyB25yazOiMkeHXxgOHznJLopfCW9pmfPsQ" />
         <activity android:name=".ProductActivity"/>
         <activity android:name=".ProductAvailabilityActivity"/>
+        <activity android:name=".VendorLocationActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

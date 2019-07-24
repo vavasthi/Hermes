@@ -51,16 +51,17 @@
                 android:textSize="24dp"
                 android:layout_weight=".5"/>
         </LinearLayout>
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/map_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <fragment
-                    android:id="@+id/vendor_location"
-                    class="com.google.android.gms.maps.SupportMapFragment"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp" />
-            </LinearLayout>
+                android:src="@drawable/ic_location_on_black_24dp"
+                android:layout_gravity="right"/>
         </LinearLayout>
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>
