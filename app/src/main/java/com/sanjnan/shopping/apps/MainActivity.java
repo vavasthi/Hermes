@@ -76,9 +76,6 @@ public class MainActivity
         extends AbstractActivity
         implements LocationManager.Listener {
 
-    private String productId = null;
-    private float price = -0.0f;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +121,15 @@ public class MainActivity
                 public void onClick(View view) {
                     Intent intent = new Intent(MainActivity.this, ProductActivity.class);
                     Bundle b = new Bundle();
+                    String productId = ((TextView)findViewById(R.id.barcodeNumber)).getText().toString();
+                    float price = 0.0f;
+                    try {
+
+                        price = Float.parseFloat(((TextView)findViewById(R.id.price)).getText().toString());
+                    }
+                    catch (NumberFormatException ex) {
+
+                    }
                     b.putString(Constants.PRODUCT_ID, productId);
                     b.putFloat(Constants.PRICE, price);
                     intent.putExtras(b);
@@ -184,7 +190,6 @@ public class MainActivity
                 makeDetailsVisible();
                 TextView tv = findViewById(R.id.barcodeNumber);
                 tv.setText(result.getContents());
-                productId = tv.getText().toString();
             }
         }
         else if(requestCode == Constants.REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -309,7 +314,6 @@ public class MainActivity
                         if (barcodes.size() > 0) {
                             TextView tv = (TextView) (findViewById(R.id.barcodeNumber));
                             tv.setText(barcodes.get(0).getRawValue());
-                            productId = tv.getText().toString();
                             makeDetailsVisible();
                         }
                         else {
@@ -396,13 +400,6 @@ public class MainActivity
                                         if (numberPercentage(text) > .5) {
                                             TextView tv = (TextView) (findViewById(R.id.price));
                                             tv.setText(text);
-                                            try {
-
-                                                price = Float.parseFloat(tv.getText().toString());
-                                            }
-                                            catch(NumberFormatException ex) {
-                                                price = 0.0f;
-                                            }
                                         }
                                         else {
 

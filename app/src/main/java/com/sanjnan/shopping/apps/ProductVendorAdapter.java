@@ -45,6 +45,7 @@ public class ProductVendorAdapter
         this.context = context;
         this.productId = productId;
         this.price = price;
+        populateData();
     }
 
     // Provide a reference to the views for each data item
@@ -70,25 +71,23 @@ public class ProductVendorAdapter
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        for (DataSnapshot dsc : dataSnapshot.getChildren()) {
-                            final VendorProduct vp = dsc.getValue(VendorProduct.class);
-                            Database.INSTANCE.getInstance().getReference()
-                                    .child(String.format("%s/%s", Constants.VENDORS_KEY, vp.getVendorId()))
-                                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot vDataSnapshot) {
-                                            Vendor v = vDataSnapshot.getValue(Vendor.class);
-                                            vendorProductList.add(vp);
-                                            vendorMap.put(v.getId(), v);
-                                            refreshDataset();
-                                        }
+                        final VendorProduct vp = dataSnapshot.getValue(VendorProduct.class);
+                        Database.INSTANCE.getInstance().getReference()
+                                .child(String.format("%s/%s", Constants.VENDORS_KEY, vp.getVendorId()))
+                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot vDataSnapshot) {
+                                        Vendor v = vDataSnapshot.getValue(Vendor.class);
+                                        vendorProductList.add(vp);
+                                        vendorMap.put(v.getId(), v);
+                                        refreshDataset();
+                                    }
 
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                        }
-                                    });
-                        }
+                                    }
+                                });
                     }
 
                     @Override
